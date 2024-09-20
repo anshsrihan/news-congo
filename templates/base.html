@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub</title>
+</head>
+<body>
+    <header>
+        <h1>RSS (copy) </h1>
+        <form action="{{url_for('search')}}" method="GET" >
+            <input type="text" name="query" placeholder="Search for keyword">
+            <input type="submit" value="Search">
+            <button type="submit">Search</button>
+        </form>
+    </header>
+    {% block content %}{% endblock %}
+</body>
+</html>
