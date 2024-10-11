@@ -2,19 +2,19 @@ import feedparser
 from flask import Flask, render_template, request
 import ssl
 
-# Bypass SSL verification
+# Bypass SSL verification(had to do this since I was having problems with my certificate and without this was unable to call the data using Rss feeds)
 ssl._create_default_https_context = ssl._create_unverified_context
 
 app = Flask(__name__)
 
-# Define RSS feeds
+# Link to all the RSS feeds
 RSS_FEEDS = {
     'Mint': 'https://www.livemint.com/rss/companies',
     'Yahoo': 'https://finance.yahoo.com/news/rssindex',
     'Financial Express': 'https://www.financialexpress.com/rss',
     'Techcrunch': 'https://techcrunch.com/feed/'
 }
-
+#create a dictionary of RSS feeds
 @app.route("/")
 def index():
     articles = []
