@@ -24,7 +24,7 @@ def index():
         articles.extend(entries)
 
     # Sort articles by publication date, handling missing 'published' attribute
-    articles = sorted(articles, key=lambda x: x[1].get('published_parsed', 0), reverse=True)
+    articles = sorted(articles, key=lambda x: x[1].published_parsed, reverse=True)
 
     # Pagination logic
     page = request.args.get('page', 1, type=int)
@@ -42,15 +42,14 @@ def search():
     articles = []
 
     for source, feed in RSS_FEEDS.items():
-        parsed = feedparser.parse(feed)
-        entries = [(source, entry) for entry in parsed.entries]
+        parsed_feed = feedparser.parse(feed)
+        entries = [(source, entry) for entry in parsed_feed.entries]
         articles.extend(entries)
 
     # Normalize the query to lowercase
     query_lower = query.lower()
     result = [article for article in articles if 
-              query_lower in article[1].title.lower() or 
-              query_lower in article[1].get('summary', '').lower()]
+              query_lower in article[1].title.lower() ]
 
     return render_template('search.html', articles=result, query=query)
 
