@@ -5,8 +5,6 @@ import ssl
 # Bypass SSL verification
 ssl._create_default_https_context = ssl._create_unverified_context
 
-# Your existing code...
-
 feed_url = 'https://www.livemint.com/rss/companies'
 parsed_feed = feedparser.parse(feed_url)
 print(f"Parsed Feed: {parsed_feed}")
